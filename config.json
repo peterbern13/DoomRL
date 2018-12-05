@@ -1,6 +1,5 @@
 {
 	"stack_size" : 4,
 	"frame_size" : 128,
-	"game_config" : "basic.cfg",
-	
+	"game_config" : "basic.cfg"
 }
