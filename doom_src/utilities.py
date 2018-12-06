@@ -4,6 +4,7 @@ import json
 import random
 
 from collections import deque
+from vizdoom import *
 
 
 def create_environment(config):
@@ -26,12 +27,12 @@ def create_environment(config):
     return game, actions
 
 
-def test_environment():
+def test_environment(config):
     """
     Function to test the basic game environment.
     """
 
-    game, actions = create_environment()
+    game, actions = create_environment(config)
 
     episodes = 10
 
