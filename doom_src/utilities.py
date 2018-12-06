@@ -2,6 +2,7 @@ import numpy as np
 import skimage
 import json
 import random
+import time
 
 from collections import deque
 from vizdoom import *
