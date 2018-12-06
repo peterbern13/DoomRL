@@ -1,8 +1,14 @@
 {
 	"stack_size" : 4,
 	"frame_size" : 128,
-	"game_config" : "basic.cfg",
-	"memory_size" : 10000,
+    "memory_size" : 10000,
 	"batch_size" : 32,
-	"pretrain_steps": 32
+	"pretrain_steps": 32,
+    "game_config" : "basic.cfg",
+	"game_scenario" : "basic.wad",
+	"actions" : {
+        "left" : [1 ,0, 0],
+        "right" : [0, 1, 0],
+        "shoot" : [0, 0, 1]
+    }
 }

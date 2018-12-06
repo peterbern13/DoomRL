@@ -6,6 +6,57 @@ import random
 from collections import deque
 
 
+def create_environment(config):
+    """
+    Function to define a new game environment.
+    """
+
+    game = DoomGame()
+    
+    # Load the correct configuration
+    game.load_config(config['game_config'])
+    
+    # Load the correct scenario (in our case basic scenario)
+    game.set_doom_scenario_path(config['game_scenario'])
+    
+    game.init()
+    
+    actions = [config['actions'][key] for key in config['actions']]
+
+    return game, actions
+
+
+def test_environment():
+    """
+    Function to test the basic game environment.
+    """
+
+    game, actions = create_environment()
+
+    episodes = 10
+
+    for i in range(episodes):
+        game.new_episode()
+
+        while not game.is_episode_finished():
+            state = game.get_state()
+            img = state.screen_buffer
+            misc = state.game_variables
+
+            action = random.choice(actions)
+            print(action)
+
+            reward = game.make_action(action)
+            print ("\treward:", reward)
+
+            time.sleep(0.02)
+
+        print ("Result:", game.get_total_reward())
+        time.sleep(1)
+        
+    game.close()
+
+
 def get_config(config_file_path):
     """
     Reads configuration variables form file.
