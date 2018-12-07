@@ -82,7 +82,7 @@ def preproc_frame(frame, frame_size):
     )
 
 
-def stack_frames(stacked_frames, raw_frame, new_ep, stack_size):
+def stack_frames(stacked_frames, raw_frame, new_ep, stack_size, frame_size):
     """
     Stack multiple frames together in a queue.
 
@@ -90,11 +90,11 @@ def stack_frames(stacked_frames, raw_frame, new_ep, stack_size):
     queue. 
     """
     
-    frame = preproc_frame(raw_frame)
+    frame = preproc_frame(raw_frame, frame_size)
     
     if new_ep:
         # Because we're in a new episode, copy the same frame 4x
-        for i in range(stack_size): stack_frames.append(frame) 
+        for i in range(stack_size): stacked_frames.append(frame) 
         
     else:
         # Append frame to deque, automatically removes the oldest frame
@@ -129,7 +129,7 @@ class Memory():
         return [self.buffer[i] for i in index]
 
 
-def pretrain(config, memory, actions, pretrain_steps, game):
+def pretrain(pretrain_steps, memory, stack_size, frame_size, stacked_frames, game, actions):
     """
     Perform the pre-training filling the memory buffer.
     """
@@ -141,7 +141,7 @@ def pretrain(config, memory, actions, pretrain_steps, game):
         if i == 0:
             frame = game.get_state().screen_buffer
             state, stacked_frames = stack_frames(
-                stacked_frames, frame, True, config["stack_size"]
+                stacked_frames, frame, True, stack_size, frame_size
             )
 
         action = random.choice(actions)
@@ -156,13 +156,13 @@ def pretrain(config, memory, actions, pretrain_steps, game):
             
             frame = game.get_state().screen_buffer
             state, stacked_frames = stack_frames(
-                stacked_frames, frame, True, config["stack_size"]
+                stacked_frames, frame, True, stack_size, frame_size
             )
 
         else:
             next_frame = game.get_state().screen_buffer
             next_state, stacked_frames = stack_frames(
-                stacked_frames, next_frame, False
+                stacked_frames, next_frame, False, stack_size, frame_size
             )
             
             memory.add((state, action, reward, next_state, done))
