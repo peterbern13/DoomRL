@@ -72,6 +72,8 @@ def preproc_frame(frame, frame_size):
     returns 2D array.
     """
 
+    frame = np.transpose(frame, (1, 2, 0))
+
     return skimage.transform.resize(
         ((frame.mean(axis=-1,keepdims=1)).squeeze()[30:-10,10:-10])/255.0,
         [frame_size, frame_size], 
@@ -166,7 +168,9 @@ def pretrain(config, memory, actions, pretrain_steps, game):
             memory.add((state, action, reward, next_state, done))
             state = next_state
 
-class LinearSchedule(object):                                                                                                                                                                                                                                           
+
+class LinearSchedule(object):      
+
     def __init__(self, schedule_timesteps, final_p, initial_p=1.0):                                                                                                                                                                                                     
         '''
         Linear interpolation between initial_p and final_p over                                                                                                                                                                                                      
@@ -174,16 +178,20 @@ class LinearSchedule(object):
         returned.                                                                                                                                                                                                                                                       
                                                                                                                                                                                                                                                                         
         Args:                                                                                                                                                                                                                                                    
-            - schedule_timesteps: Number of timesteps for which to linearly anneal initial_p to final_p                                                                                                                                                                                                                                                  
+            - schedule_timesteps: Number of timesteps for which to linearly 
+                anneal initial_p to final_p                                                                                                                                                                                                                                                  
             - initial_p: initial output value                                                                                                                                                                                                                                        
             -final_p: final output value                                                                                                                                                                                                                                          
-        '''                                                                                                                                                                                                                                                       
+        '''
+
         self.schedule_timesteps = schedule_timesteps                                                                                                                                                                                                                    
         self.final_p = final_p                                                                                                                                                                                                                                          
         self.initial_p = initial_p                                                                                                                                                                                                                                      
                                                                                                                                                                                                                                                                          
-    def value(self, t):                                                                                                                                                                                                                                                 
+    def value(self, t):    
+        """
+        Will return the value of epsilon at time t.
+        """
+
         fraction = min(float(t) / self.schedule_timesteps, 1.0)                                                                                                                                                                                                         
-        return self.initial_p + fraction * (self.final_p - self.initial_p) 
-
-
+        return self.initial_p + fraction * (self.final_p - self.initial_p)
