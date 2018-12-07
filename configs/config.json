@@ -4,6 +4,10 @@
     "memory_size" : 10000,
 	"batch_size" : 32,
 	"pretrain_steps": 32,
+	"learning_rate": 0.001,
+	"annealing_start": 1.0,
+	"annealing_stop": 0.01,
+	"annealing_steps": 1000,
     "game_config" : "configs/basic.cfg",
 	"game_scenario" : "configs/basic.wad",
 	"actions" : {
