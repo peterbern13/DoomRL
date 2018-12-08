@@ -5,6 +5,7 @@
 	"batch_size" : 32,
 	"pretrain_steps": 32,
 	"learning_rate": 0.001,
+	"gamma": 0.9,
 	"annealing_start": 1.0,
 	"annealing_stop": 0.01,
 	"annealing_steps": 1000,

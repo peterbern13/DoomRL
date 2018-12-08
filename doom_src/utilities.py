@@ -103,7 +103,7 @@ def stack_frames(stacked_frames, raw_frame, new_ep, stack_size, frame_size):
     # Stack the frames
     stacked_state = np.stack(stacked_frames, axis=2)
 
-    return stacked_state, stacked_frames
+    return stacked_state
 
 
 class Memory():
@@ -140,7 +140,7 @@ def pretrain(pretrain_steps, memory, stack_size, frame_size, stacked_frames, gam
         
         if i == 0:
             frame = game.get_state().screen_buffer
-            state, stacked_frames = stack_frames(
+            state = stack_frames(
                 stacked_frames, frame, True, stack_size, frame_size
             )
 
@@ -155,13 +155,13 @@ def pretrain(pretrain_steps, memory, stack_size, frame_size, stacked_frames, gam
             game.new_episode()
             
             frame = game.get_state().screen_buffer
-            state, stacked_frames = stack_frames(
+            state = stack_frames(
                 stacked_frames, frame, True, stack_size, frame_size
             )
 
         else:
             next_frame = game.get_state().screen_buffer
-            next_state, stacked_frames = stack_frames(
+            next_state = stack_frames(
                 stacked_frames, next_frame, False, stack_size, frame_size
             )
             
