@@ -1,3 +1,4 @@
+import matplotlib.pyplot as plt
 import numpy as np
 import skimage
 import json
@@ -197,5 +198,25 @@ class LinearSchedule(object):
         Will return the value of epsilon at time t.
         """
 
-        fraction = min(float(t) / self.schedule_timesteps, 1.0)                                                                                                                                                                                                         
+        fraction = min(float(t) / self.schedule_timesteps, 1.0)
         return self.initial_p + fraction * (self.final_p - self.initial_p)
+
+
+def plot_reward_curve(rewards, title, smooth):
+    n_episodes = len(rewards)
+    avgs = []
+    smoothed = []
+    
+    avg = 0.0
+    for ep in range(1, n_episodes+1):
+        avg += rewards[ep - 1]
+        
+        if ep % smooth == 0:
+            smoothed.append(avg / float(smooth))
+            avg = 0.0
+    
+    fig = plt.figure(figsize=(16, 8))
+    ax = fig.add_subplot(111)
+    ax.set(title=title, xlabel="Episodes", ylabel="Average Reward")    
+    ax.plot(range(len(smoothed)), smoothed, 'b')
+    plt.show()
