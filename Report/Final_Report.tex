@@ -8,6 +8,15 @@
 \usepackage{url}  %Required
 \usepackage{graphicx}  %Required
 \frenchspacing  %Required
+%\usepackage{biblatex}
+\usepackage{comment}
+\usepackage[
+backend=biber,
+style=alphabetic,
+sorting=ynt
+]{biblatex}
+\addbibresource{sample.bib}
+
 \setlength{\pdfpagewidth}{8.5in}  %Required
 \setlength{\pdfpageheight}{11in}  %Required
 %PDF Info Is Required:
@@ -29,30 +38,37 @@ AAAI creates proceedings, working notes, and technical reports directly from ele
 \end{abstract}
 
 \section{Introduction}
+Reinforcement learning has been widely used to successfully solve a variety of games. Doom is a classic First-Person Shooter (FPS) game from 1993 created by Id Software. As one of the first FPS games to market, it is simple in its gameplay in comparison to contemporary videogames, but can still be significantly more complex than many other Atari games, such as Pong. Doom has the following components: a player is a marine in the central point of an invasion of demons. The agent can be placed in a variety of scenarios with a multitude of differently behaving demons. At any time the agent can navigate or shoot his weapon. The game state may not be completely visible at all times and obstacles often partially obscure the display. Most importantly for this project, the complexity of the game can be controlled.
+
+The above features make Doom an interesting study for reinforcement learning because of the variety of settings with varying difficulties. Training an AI is possible in simple or complex settings variety of architectures. The focus of this project is only restricted to a simple game state because of the power of the machines used and the time we had to run them. The parameters in this project can easily be changed to train our models on a complex Doom environment.
+
  
 
-%Doom, a classical First-Person Shooting (FPS) game created in 1993. It was designed to have a plot in which most of the components are sci-fi and horror: the player is a marine who is in the central point of an invasion of demons from hell. Our agent is going to play in only one scenario which is named Doom Defend Line (Figure 1). In this scenario, our agent is in a closed room and has to battle against several demons that can be classified in two types: demons throwing fire balls (they only move to the sides), and short-distance attack demons that slowly approach to our agent. Both of them respawn. The specific characteristics of the game are as follow. The objective on each episode is to kill as many monsters. For every monster killed, 1 point is received, and for every time our agent is killed, one point is subtracted. There are three possible actions for our agent: turn left, turn right and shoot. To complete the goal proposed in the simulator, the agent needs to reach 15 as the best 100-episode average reward. To get 15 points in one episode our agent either has to kill 16 monsters before being killed, or kill 15 monsters without being killed. In this work, we create a machine learning agent that play Doom Defend Line, which is a scenario from the classic game Doom. We hypothesize that by using two different RL methods separately we can create an agent that is competi-tive enough to score 15 points in average through 100 con-secutive episodes which is the goal proposed in the simula-tor website. 
-
+ 
 
 
 
 
 \section{Background}
-Reinforcement learning has been widely used to successfully solve a variety of games. Doom is a classic First-Person Shooter (FPS) game from 1993 created by Id Software. As one of the first FPS games to market, it is simple in its gameplay in comparison to anything modern, but is still significantly more complex than many other Atari games, such as Pong. In Doom, the user can move, attack, and pick up items and the game state may not be completely visible at all times and obstacles often partially obscure the display. These complexities make Doom an interesting study for reinforcement learning while in this project we focus on the simple case of the user encountering a single adversary in a match. 
+
 
 
 \section{Related Work}
+Reinforcement learning and deep reinforcement learning in particular have a history of success on fully observable games for Atari, such as Pong or Space Invaders \cite{playing_atari}. Most of the best performing AI solvers were trained using deep recurrent Q-learning, weighted replay, or dueling. Google DeepMind recently developed an Asynchronous Advantage Actor-Critic (A3C) model that has also been used to train AI solvers for Atari games with success as well. The victory of AlphaGo over the best human player received wide media attention as a landmark. While we restrict our focus in this project to deep-Q learning and SARSA, more complicated models have proven to be more successful especially running on more advanced architectures. 
 
+Doom in particular has a history with using deep-Q networks to train solvers. Recent works on training the Doom AI have created models that outperform built-in bots and even some human players  
 
 
 \section{Project Description}
+We chose a very simple setting of the Doom game to train our agent. The setting for our project AI allows for the agent at any time step to do one of only three things: move left, right, or shoot. For each game episode, there is a stationary demon that does not attack the agent. Thus the goal for the 
+
 
 \section{Experiments}
 
 \section{Conclusion}
 
-
-
+\medskip
+\printbibliography
 
 
 
