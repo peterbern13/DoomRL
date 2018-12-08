@@ -1,6 +1,6 @@
 {
 	"stack_size" : 4,
-	"frame_size" : 128,
+	"frame_size" : 84,
     "memory_size" : 10000,
 	"batch_size" : 32,
 	"pretrain_steps": 32,
