@@ -144,13 +144,15 @@ def pretrain(pretrain_steps, memory, stack_size, frame_size, stacked_frames, gam
                 stacked_frames, frame, True, stack_size, frame_size
             )
 
-        action = random.choice(actions)
+        action_index = np.random.randint(len(actions))
+        action = actions[action_index]
+
         reward = game.make_action(action)
         done = game.is_episode_finished()
 
         if done:
             next_state = np.zeros(state.shape)
-            memory.add((state, action, reward, next_state, done))
+            memory.add((state, action_index, reward, next_state, done))
             
             game.new_episode()
             
@@ -165,7 +167,7 @@ def pretrain(pretrain_steps, memory, stack_size, frame_size, stacked_frames, gam
                 stacked_frames, next_frame, False, stack_size, frame_size
             )
             
-            memory.add((state, action, reward, next_state, done))
+            memory.add((state, action_index, reward, next_state, done))
             state = next_state
 
 
