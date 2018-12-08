@@ -8,7 +8,7 @@ from collections import deque
 from vizdoom import *
 
 
-def create_environment(config):
+def create_environment(config, visible=True):
     """
     Function to define a new game environment.
     """
@@ -21,6 +21,8 @@ def create_environment(config):
     # Load the correct scenario (in our case basic scenario)
     game.set_doom_scenario_path(config['game_scenario'])
     
+    game.set_window_visible(visible)
+
     game.init()
     
     actions = [config['actions'][key] for key in config['actions']]
