@@ -107,3 +107,4 @@ _vizdoom.ini
 .texpadtmp
 doom/
 tags
+saved_models/*
