@@ -26,7 +26,9 @@ def create_environment(config, visible=True):
 
     game.init()
     
-    actions = [config['actions'][key] for key in config['actions']]
+    # actions = [config['actions'][key] for key in config['actions']]
+
+    actions = config['actions']
 
     return game, actions
 
@@ -129,6 +131,9 @@ class Memory():
         )
         
         return [self.buffer[i] for i in index]
+
+    def __len__(self):
+        return len(self.buffer)
 
 
 def pretrain(pretrain_steps, memory, stack_size, frame_size, stacked_frames, game, actions):
