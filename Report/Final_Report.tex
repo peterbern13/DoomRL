@@ -51,6 +51,12 @@ The above features make Doom an interesting study for reinforcement learning bec
 
 \section{Background}
 
+\begin{figure*}
+\label{sarsa}
+  \includegraphics[width = \textwidth]{sarsa_algo}
+  \caption{High level pseudocode description of sarsa algorithm for estimating $Q$}
+\end{figure*}
+
 
 
 \section{Related Work}
@@ -64,6 +70,37 @@ We chose a very simple setting of the Doom game to train our agent. The setting 
 
 
 \section{Experiments}
+\subsection{Sarsa (on-policy TD control)}
+To test the Sarsa algorithm on Doom, we needed to first tune the parameters of the experiment. Unfortunately it was determined that for significant learning to take place, large numbers of episodes (~20,000) needed to be performed. Consider the example in figures \ref{alpha1} and \ref{alpha2} of how Sarsa performed over 3000 trials for values of the learning rate alpha set to 0.1 and 0.2. It is clear that learning hardly takes place if at all for either learning rate. 
+
+We decided to run the AI for a much larger number of episodes to see if we could witness learning taking place. We chose to do 120,000 episodes, where the $\epsilon-$greedy policy would anneal from $\epsilon = 1$, i.e. a completely random policy, to $\epsilon=0$, i.e. a greedy policy over the first 100,000 episodes. The last 20,000 episodes show the reward when the agent greedily followed the learned policy. Unfortunately the average reward is still negative, indicating that the policy learned still had much room for improvement. Nonetheless, it is still evident that average reward did increase and then level off when the policy became completely greedy. Thus it is reasonable to infer that with much more training, the agent could learn a successful policy, albeit slowly. 
+
+
+
+
+\begin{figure}
+\label{alpha1}
+  \includegraphics[width = \columnwidth]{sarsa_3k_alpha1}
+  \caption{Running 120000 episodes of Sarsa with a smoothing window of 100 episodes. Learning rate was set to 0.1, $\epsilon$-greedy policy selection was used with annealing steps from 1 to 0 over 2500 episodes and the last 500 episodes follow a completely greedy policy }
+\end{figure}
+
+\begin{figure}
+\label{alpha2}
+  \includegraphics[width = \columnwidth]{sarsa_3k_alpha2}
+  \caption{Running 3000 episodes of Sarsa with a smoothing window of 100 episodes. Learning rate was set to 0.2, $\epsilon$-greedy policy selection was used with annealing steps from 1 to 0 over 2500 episodes and the last 500 episodes follow a completely greedy policy }
+\end{figure}
+
+
+\begin{figure}
+\label{100k}
+  \includegraphics[width = \columnwidth]{sarsa_120k_3kwindow}
+  \caption{Running 120000 episodes of Sarsa with a smoothing window of 1000 episodes. Learning rate was set to 0.1, $\epsilon$-greedy policy selection was used with annealing steps from 1 to 0 over 100000 episodes and the last 20000 episodes follow a completely greedy policy }
+\end{figure}
+
+
+\subsection{Deep-Q Learning}
+
+
 
 \section{Conclusion}
 
