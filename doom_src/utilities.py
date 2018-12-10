@@ -79,8 +79,7 @@ def preproc_frame(frame, frame_size):
 
     return skimage.transform.resize(
         ((frame.mean(axis=-1,keepdims=1)).squeeze()[60:-30,40:-40])/255.0,
-        [frame_size, frame_size], 
-        anti_aliasing=True,
+        [frame_size, frame_size],
         mode='reflect'
     )
 

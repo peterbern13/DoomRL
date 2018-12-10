@@ -108,3 +108,4 @@ _vizdoom.ini
 doom/
 tags
 saved_models/*
+.DS_Store
