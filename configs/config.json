@@ -10,8 +10,9 @@
 	"annealing_start": 1.0,
 	"annealing_stop": 0.01,
 	"annealing_steps": 1000,
-    "game_config" : "configs/basic.cfg",
-	"game_scenario" : "configs/basic.wad",
+	"update_freq": 20,
+    "game_config" : "configs/simpler_basic.cfg",
+	"game_scenario" : "configs/simpler_basic.wad",
 	"actions" : [ 
 		[1 ,0, 0], 
 		[0, 1, 0], 
